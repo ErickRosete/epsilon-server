@@ -1,0 +1,7 @@
+{
+    "env":{
+        "MONGO_USER": "astradev",
+        "MONGO_PASSWORD": "Daedalus2019",
+        "MONGO_DB":"test-db"
+    }
+}

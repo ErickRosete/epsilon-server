@@ -25,7 +25,8 @@ const productDef = `
 
 const productQuery = `
     products: [Product!]!
-    product(id: ID!): Product
+    product(id: ID!): Product!
+    subcategoryProducts(id: ID!): [Product!]!
 `;
 
 const productMutation = `

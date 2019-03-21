@@ -1,15 +1,15 @@
 const subcategoryDef = `
     type Subcategory {
         _id: ID!
-        name: String!
+        name: String!        
+        imageLink: String
         description: String
-        products: [Product]
     }
 
     input SubcategoryInput{
-        name: String!
+        name: String
+        imageLink: String
         description: String
-        products: [ID]
     }
 `;
 

@@ -9,6 +9,7 @@ const subcategorySchema = new Schema(
             required: true
         },
         description: String,
+        imageLink: String
     },
 );
 

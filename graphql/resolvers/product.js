@@ -23,6 +23,17 @@ module.exports = {
     }
   },
 
+  subcategoryProducts: async args => {
+    try {
+      const products = await Product.find({subcategories: args.id});
+      return products.map(product => {
+        return transformProduct(product);
+      });
+    } catch (err) {
+      throw err;
+    }
+  },
+
   createProduct: async args => {
     // if (!req.isAuth) {
     //   throw new Error("Unauthenticated");

@@ -1,13 +1,11 @@
 const Subcategory = require("../../models/subcategory");
 
-const { transformSubcategory } = require("./merge");
-
 module.exports = {
   subcategories: async () => {
     try {
       const subcategories = await Subcategory.find();
       return subcategories.map(subcategory => {
-        return transformSubcategory(subcategory);
+        return { ...subcategory._doc };
       });
     } catch (err) {
       throw err;
@@ -17,7 +15,7 @@ module.exports = {
   subcategory: async (args) => {
     try {
       const subcategory = await Subcategory.findById(args.id);
-      return transformSubcategory(subcategory);
+      return { ...subcategory._doc };
     } catch (err) {
       throw err;
     }
@@ -33,7 +31,7 @@ module.exports = {
 
     try {
       const result = await subcategory.save();
-      return transformSubcategory(result);
+      return { ...result._doc };
     } catch (err) {
       throw err;
     }
@@ -44,16 +42,16 @@ module.exports = {
       const subcategory = await Subcategory.findByIdAndUpdate(args.id,
         { ...args.subcategoryInput },
         { new: true });
-      return transformSubcategory(subcategory);
+      return { ...subcategory._doc };
     } catch (err) {
       throw err;
     }
   },
 
-  deleteSubcategory: async (args, req) => {
+  deleteSubcategory: async (args) => {
     try {
       const subcategory = await Subcategory.findByIdAndDelete(args.id);
-      return transformSubcategory(subcategory);
+      return { ...subcategory._doc };
     } catch (err) {
       throw err;
     }

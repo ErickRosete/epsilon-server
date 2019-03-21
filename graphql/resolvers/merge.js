@@ -85,7 +85,7 @@ const getSubcategories = async subcategoryIds => {
       _id: { $in: subcategoryIds }
     });
     return subcategories.map(subcategory => {
-      return transformSubcategory(subcategory);
+      return { ...subcategory._doc };
     });
   } catch (err) {
     throw err;
@@ -95,7 +95,9 @@ const getSubcategories = async subcategoryIds => {
 const transformProduct = product => {
   return {
     ...product._doc,
-    subcategories: () => subcategoryLoader.loadMany(product._doc.subcategories)
+    subcategories: () => subcategoryLoader.loadMany(
+      product._doc.subcategories.map((subcategory) => subcategory.toString())
+    )
   };
 };
 
@@ -110,18 +112,12 @@ const transformUser = user => {
 const transformCategory = category => {
   return {
     ...category._doc,
-    subcategories: () => subcategoryLoader.loadMany(category._doc.subcategories)
-  };
-};
-
-const transformSubcategory = subcategory => {
-  return {
-    ...subcategory._doc,
-    products: () => productLoader.loadMany(subcategory._doc.products)
+    subcategories: () => subcategoryLoader.loadMany(
+      category._doc.subcategories.map(subcategory => subcategory.toString())
+    )
   };
 };
 
 exports.transformProduct = transformProduct;
 exports.transformUser = transformUser;
 exports.transformCategory = transformCategory;
-exports.transformSubcategory = transformSubcategory;

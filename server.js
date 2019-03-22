@@ -12,6 +12,8 @@ const externalRequest = require("./middleware/external-requests");
 const { saveImage, saveImages } = require("./helpers/images");
 const isAuth = require("./middleware/is-auth");
 
+const port = process.env.PORT || 5000;
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -29,7 +31,7 @@ app.use(
 );
 
 const upload = multer({
-    dest: "app/uploads"
+    dest: "/app/uploads"
 });
 
 app.post('/uploadImage', upload.single("file"), (req, res) => {
@@ -46,5 +48,5 @@ mongoose
         process.env.MONGO_PASSWORD
         }@cluster-0l6n5.mongodb.net/${process.env.MONGO_DB}?retryWrites=true`
         , { useNewUrlParser: true })
-    .then(() => app.listen(8000))
+    .then(() => app.listen(port))
     .catch(err => { console.log("error general"); console.log(err) });

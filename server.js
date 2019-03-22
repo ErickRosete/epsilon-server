@@ -4,12 +4,12 @@ const mongoose = require("mongoose");
 const graphqlSchema = require("./graphql/schema/index");
 const graphqlResolvers = require("./graphql/resolvers/index");
 
-const multer = require("multer");
+// const multer = require("multer");
 const bodyParser = require("body-parser");
 
 const externalRequest = require("./middleware/external-requests");
 
-const { saveImage, saveImages } = require("./helpers/images");
+// const { saveImage, saveImages } = require("./helpers/images");
 const isAuth = require("./middleware/is-auth");
 
 const app = express();
@@ -28,17 +28,17 @@ app.use(
     })
 );
 
-const upload = multer({
-    dest: "/uploads"
-});
+// const upload = multer({
+//     dest: "/uploads"
+// });
 
-app.post('/uploadImage', upload.single("file"), (req, res) => {
-    saveImage(req, res);
-});
+// app.post('/uploadImage', upload.single("file"), (req, res) => {
+//     saveImage(req, res);
+// });
 
-app.post('/uploadImages', upload.array("files"), (req, res) => {
-    saveImages(req, res);
-});
+// app.post('/uploadImages', upload.array("files"), (req, res) => {
+//     saveImages(req, res);
+// });
 
 mongoose
     .connect(

@@ -38,6 +38,11 @@ app.post('/uploadImage', upload.single("file"), (req, res) => {
     saveImage(req, res);
 });
 
+app.post('/sendEmail', (req, res) => {
+    const isSend = sendEmail(req.body);
+    isSend ? res.status(200).json(req.body) : res.status(400).send({ error: "server error" });
+});
+
 app.post('/uploadImages', upload.array("files"), (req, res) => {
     saveImages(req, res);
 });

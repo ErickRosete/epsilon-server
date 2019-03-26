@@ -18,16 +18,16 @@ exports.sendEmail = async (emailContent) => {
             <p>${emailContent.name} quiere contactarse con usted </p>
             <p>Su correo electrónico es: ${emailContent.email}</p>
             <p>Su teléfono es: ${emailContent.phone}</p>
-            <p>El tema del correo es: ${emailContent.topic}</p>
-            <p>Su mensaje es el siguiente:</p>
-            <p>${emailContent.body}</p>
-            <p style="margin-top:3rem;">Atte: Sitio IAFCJ</p>
+            <p>El equipo que necesitan es: ${emailContent.equipment}</p>
+            <p>La cantidad de equipos son: ${emailContent.quantity}</p>
+            <p>El proyecto en el que se utilizaran los equipos es: ${emailContent.project}</p>
+            <p style="margin-top:3rem;">Atte: Sitio Epsilon</p>
         `
 
         // setup email data with unicode symbols
         const mailOptions = {
-            from: '"Sitio IAFCJ" <erickrosetebeas@hotmail.com>', // sender address
-            to: "erickrosetebeas@hotmail.com", // list of receivers
+            from: '"Sitio Epsilon" <erick.rosete@astradev.co>', // sender address
+            to: "erick.rosete@astradev.co", // list of receivers
             subject: "Contacto - Sitio Web", // Subject line
             html: htmlContent // html body
         };

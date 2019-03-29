@@ -118,6 +118,14 @@ const transformCategory = category => {
   };
 };
 
+const transformClient = client => {
+  return {
+    ...client._doc,
+    address: getAddress.bind(this, client.address)
+  }
+}
+
 exports.transformProduct = transformProduct;
 exports.transformUser = transformUser;
 exports.transformCategory = transformCategory;
+exports.transformClient = transformClient;

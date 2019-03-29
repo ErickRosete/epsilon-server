@@ -12,6 +12,17 @@ module.exports = {
     }
   },
 
+  activePromotions: async () => {
+    try {
+      const promotions = await Promotion.find({ active: true });
+      return promotions.map(promotion => {
+        return { ...promotion._doc };
+      });
+    } catch (err) {
+      throw err;
+    }
+  },
+
   promotion: async args => {
     try {
       const promotion = await Promotion.findById(args.id);

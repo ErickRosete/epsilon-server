@@ -2,19 +2,20 @@ const promotionDef = `
     type Promotion {
         _id: ID!
         name: String!
-        imageUrl: String!
+        imageLink: String!
         active: Boolean!
     }
 
     input PromotionInput{
         name: String
-        imageUrl: String
+        imageLink: String
         active: Boolean
     }
 `;
 
 const promotionQuery = `
     promotions: [Promotion!]!
+    activePromotions: [Promotion!]!
     promotion(id: ID!): Promotion
 `;
 

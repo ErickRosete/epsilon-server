@@ -7,14 +7,12 @@ const promotionSchema = new Schema(
             type: String,
             required: true
         },
-        imageUrl: {
+        imageLink: {
             type: String,
             required: true
         },
-        active: {
-            type: Boolean,
-            required: true
-        }
+        active: Boolean,
+
     },
 );
 

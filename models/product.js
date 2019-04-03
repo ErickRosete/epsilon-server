@@ -11,11 +11,6 @@ const productSchema = new Schema({
     type: String,
     required: true
   },
-  price: {
-    type: Number,
-    required: true
-  },
-  quantity: Number,
   imageLinks: [String],
   shortDescription: String,
   quantity: Number,
@@ -24,7 +19,10 @@ const productSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Subcategory"
     }
-  ]
+  ],
+  generic: Boolean,
+  quantity: Number,
+  codes: [String],
 });
 
 module.exports = mongoose.model("Product", productSchema);

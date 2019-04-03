@@ -2,24 +2,26 @@ const productDef = `
     type Product {
         _id: ID!
         name: String!
-        price: Float
         quantity: Int
         imageLinks: [String]
         shortDescription: String
         description: String
         videoLink: String
         subcategories: [Subcategory]
+        generic: Boolean
+        codes: [String]
     }
 
     input ProductInput{
         name: String
-        price: Float
         quantity: Int
         imageLinks: [String]
         shortDescription: String
         description: String
         videoLink: String
         subcategories: [ID]
+        generic: Boolean
+        codes: [String]
     }
 `;
 

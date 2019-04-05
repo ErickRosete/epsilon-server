@@ -125,7 +125,15 @@ const transformClient = client => {
   }
 }
 
+const transformProductQuotation = productQuotation => {
+  return {
+    ...productQuotation._doc,
+    product: getProduct.bind(this, productQuotation.product)
+  }
+}
+
 exports.transformProduct = transformProduct;
 exports.transformUser = transformUser;
 exports.transformCategory = transformCategory;
 exports.transformClient = transformClient;
+exports.transformProductQuotation = transformProductQuotation;

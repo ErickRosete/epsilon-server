@@ -24,8 +24,8 @@ const clientQuery = `
 
 const clientMutation = `
     createClient(clientInput: ClientInput!): Client
-    updateclient(id: ID!, clientInput: ClientInput!): Client
-    deleteclient(id: ID!): Client
+    updateClient(id: ID!, clientInput: ClientInput!): Client
+    deleteClient(id: ID!): Client
 `;
 
 exports.clientDef = clientDef;

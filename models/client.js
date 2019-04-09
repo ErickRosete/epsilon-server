@@ -3,18 +3,17 @@ const Schema = mongoose.Schema;
 
 const clientSchema = new Schema(
     {
+        email: {
+            type: String,
+            required: true
+        },
         name: {
             type: String,
             required: true
         },
+        company: String,
         phone: String,
-        email: String,
-        detail: String,
-        address:
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Address"
-        }
+        address: String
     },
 );
 

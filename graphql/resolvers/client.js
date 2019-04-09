@@ -23,6 +23,20 @@ module.exports = {
         }
     },
 
+    clientByEmail: async (args) => {
+        try {
+            const client = await Client.findOne({ email: args.email });
+
+            if (client) {
+                return transformClient(client);
+            } else {
+                throw new Error("Client does not Exists");
+            }
+        } catch (err) {
+            throw err;
+        }
+    },
+
     createClient: async (args, req) => {
         try {
             const client = Client({

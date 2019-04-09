@@ -1,11 +1,13 @@
 const User = require("../../models/user");
+const Client = require("../../models/client")
 const Product = require("../../models/product");
 const Subcategory = require("../../models/subcategory");
-const Address = require("../../models/address");
+const ProductQuotation = require("../../models/product-quotation")
 const DataLoader = require("dataloader");
 
 const { dateToString } = require("../../helpers/date");
 
+//user
 const userLoader = new DataLoader(userIds => {
   return getUsers(userIds);
 });
@@ -29,29 +31,58 @@ const getUser = async userId => {
   }
 };
 
-const addressLoader = new DataLoader(addressIds => {
-  return getAddresses(addressIds);
+//client
+const clientLoader = new DataLoader(clientIds => {
+  return getClients(clientIds);
 });
 
-const getAddresses = async addressIds => {
+const getClients = async clientIds => {
   try {
-    const addresses = await Address.find({ _id: { $in: addressIds } });
-    return addresses.map(address => {
-      return { ...address._doc };
+    const clients = await Client.find({ _id: { $in: clientIds } });
+    return clients.map(client => {
+      return transformClient(client);
     });
   } catch (err) {
+
     throw err;
   }
 };
 
-const getAddress = async addressId => {
+const getClient = async clientId => {
   try {
-    return await addressLoader.load(addressId.toString());
+    return await clientLoader.load(clientId.toString());
   } catch (err) {
     throw err;
   }
 };
 
+//product quotation
+const productQuotationLoader = new DataLoader(productQuotationIds => {
+  return getProductQuotations(productQuotationIds);
+});
+
+const getProductQuotations = async productQuotationIds => {
+  try {
+    const productQuotations = await ProductQuotation.find({ _id: { $in: productQuotationIds } });
+    return productQuotations.map(productQuotation => {
+      return transformProductQuotation(productQuotation);
+    });
+  } catch (err) {
+
+    throw err;
+  }
+};
+
+const getProductQuotation = async productQuotationId => {
+  try {
+    return await productQuotationLoader.load(productQuotationId.toString());
+  } catch (err) {
+    throw err;
+  }
+};
+
+
+//product
 const productLoader = new DataLoader(productIds => {
   return getProducts(productIds);
 });
@@ -75,6 +106,7 @@ const getProduct = async productId => {
   }
 };
 
+//subcategory
 const subcategoryLoader = new DataLoader(subcategoryIds => {
   return getSubcategories(subcategoryIds);
 });
@@ -121,7 +153,6 @@ const transformCategory = category => {
 const transformClient = client => {
   return {
     ...client._doc,
-    address: getAddress.bind(this, client.address)
   }
 }
 
@@ -132,8 +163,18 @@ const transformProductQuotation = productQuotation => {
   }
 }
 
+const transformQuotation = quotation => {
+  return {
+    ...quotation._doc,
+    productQuotations: () => productQuotationLoader.loadMany(
+      quotation.productQuotations.map(productQuotation => productQuotation.toString())),
+    client: getClient.bind(this, quotation.client),
+  }
+}
+
 exports.transformProduct = transformProduct;
 exports.transformUser = transformUser;
 exports.transformCategory = transformCategory;
 exports.transformClient = transformClient;
 exports.transformProductQuotation = transformProductQuotation;
+exports.transformQuotation = transformQuotation;

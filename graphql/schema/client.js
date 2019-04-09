@@ -1,25 +1,26 @@
 const clientDef = `
     type Client {
         _id: ID!
+        company: String
         name: String!
         phone: String
-        email: String
-        detail: String
-        address: Address
+        email: String!
+        address: String
     }
 
     input ClientInput{
+        company: String
         name: String
         phone: String
         email: String
-        detail: String
-        address: ID
+        address: String
     }
 `;
 
 const clientQuery = `
     clients: [Client!]!
     client(id: ID!): Client!
+    clientByEmail(email: String): Client
 `;
 
 const clientMutation = `

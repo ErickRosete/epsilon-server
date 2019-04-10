@@ -11,6 +11,8 @@ const quotationSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "ProductQuotation"
     }]
-});
+},
+    { timestamps: true }
+);
 
 module.exports = mongoose.model("Quotation", quotationSchema);

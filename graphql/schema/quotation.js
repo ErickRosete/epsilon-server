@@ -12,7 +12,7 @@ const QuotationSchema = {
         }
     `,
     query: `
-        quotations: [Quotation!]!
+        quotations: [Quotation!]
         quotation(id: ID!): Quotation!
     `,
 

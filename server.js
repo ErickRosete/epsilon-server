@@ -53,5 +53,8 @@ mongoose
         process.env.MONGO_PASSWORD
         }@cluster-0l6n5.mongodb.net/${process.env.MONGO_DB}?retryWrites=true`
         , { useNewUrlParser: true })
-    .then(() => app.listen(port))
+    .then(() => {
+        app.listen(port);
+        console.log("App running on port " + port)
+    })
     .catch(err => { console.log("error general"); console.log(err) });

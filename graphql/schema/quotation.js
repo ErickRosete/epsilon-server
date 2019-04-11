@@ -4,6 +4,7 @@ const QuotationSchema = {
             _id: ID!
             productQuotations: [ProductQuotation]
             client: Client
+            createdAt: String
         }
 
         input QuotationInput{

@@ -169,6 +169,7 @@ const transformQuotation = quotation => {
     productQuotations: () => productQuotationLoader.loadMany(
       quotation.productQuotations.map(productQuotation => productQuotation.toString())),
     client: getClient.bind(this, quotation.client),
+    createdAt: dateToString(quotation.createdAt),
   }
 }
 

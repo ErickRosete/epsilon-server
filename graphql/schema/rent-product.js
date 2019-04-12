@@ -9,7 +9,7 @@ const rentProductSchema = {
 
         input RentProductInput{
             quantity: Int
-            comment: String
+            code: String
             product: ID
         }
     `,

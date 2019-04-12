@@ -6,6 +6,8 @@ const promotionResolver = require("./promotion")
 const clientResolver = require("./client")
 const productQuotationResolver = require("./product-quotation")
 const quotationResolver = require("./quotation")
+const rentProductResolver = require("./rent-product");
+const rentResolver = require("./rent")
 
 const rootResolver = {
   ...categoryResolver,
@@ -15,7 +17,9 @@ const rootResolver = {
   ...promotionResolver,
   ...clientResolver,
   ...productQuotationResolver,
-  ...quotationResolver
+  ...quotationResolver,
+  ...rentProductResolver,
+  ...rentResolver
 };
 
 module.exports = rootResolver;

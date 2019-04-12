@@ -3,6 +3,7 @@ const Client = require("../../models/client")
 const Product = require("../../models/product");
 const Subcategory = require("../../models/subcategory");
 const ProductQuotation = require("../../models/product-quotation")
+const RentProduct = require("../../models/rent-product")
 const DataLoader = require("dataloader");
 
 const { dateToString } = require("../../helpers/date");
@@ -124,6 +125,30 @@ const getSubcategories = async subcategoryIds => {
   }
 };
 
+//rent product
+const rentProductLoader = new DataLoader(rentProductIds => {
+  return getRentProducts(rentProductIds);
+})
+
+const getRentProducts = async rentProductIds => {
+  try {
+    const rentProducts = await RentProduct.find({ _id: { $in: rentProductIds } });
+    return rentProducts.map(rentProduct => transformRentProduct(rentProduct));
+  } catch (err) {
+    throw err;
+  }
+};
+
+const getRentProduct = async rentProductId => {
+  try {
+    return await rentProductLoader.load(rentProductId.toString());
+  } catch (err) {
+    throw err;
+  }
+}
+
+
+//transform
 const transformProduct = product => {
   return {
     ...product._doc,
@@ -173,9 +198,30 @@ const transformQuotation = quotation => {
   }
 }
 
+const transformRentProduct = rentProduct => {
+  return {
+    ...rentProduct._doc,
+    product: getProduct.bind(this, rentProduct.product)
+  }
+}
+
+const transformRent = rent => {
+  return {
+    ...rent._doc,
+    startDate: dateToString(rent.startDate),
+    endDate: dateToString(rent.endDate),
+    client: getClient.bind(this, rent.client),
+    rentProducts: () => RentProduct.loadMany(
+      rent.rentProducts.map(rentProduct => rentProduct.toString())
+    ),
+  }
+}
+
 exports.transformProduct = transformProduct;
 exports.transformUser = transformUser;
 exports.transformCategory = transformCategory;
 exports.transformClient = transformClient;
 exports.transformProductQuotation = transformProductQuotation;
 exports.transformQuotation = transformQuotation;
+exports.transformRentProduct = transformRentProduct;
+exports.transformRent = transformRent;

@@ -9,7 +9,7 @@ const rentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Client"
     },
-    rentProduct: [
+    rentProducts: [
         {
             type: Schema.Types.ObjectId,
             ref: "RentProduct"

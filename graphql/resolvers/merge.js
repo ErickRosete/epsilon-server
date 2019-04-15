@@ -158,6 +158,18 @@ const transformProduct = product => {
   };
 };
 
+const transformSuperProduct = superProduct => {
+  return {
+    ...superProduct._doc,
+    subcategories: () => subcategoryLoader.loadMany(
+      superProduct.subcategories.map((subcategory) => subcategory.toString())
+    ),
+    products: () => productLoader.loadMany(
+      superProduct.products.map((product) => product.toString())
+    )
+  };
+};
+
 const transformUser = user => {
   let res = {
     ...user._doc,
@@ -225,3 +237,4 @@ exports.transformProductQuotation = transformProductQuotation;
 exports.transformQuotation = transformQuotation;
 exports.transformRentProduct = transformRentProduct;
 exports.transformRent = transformRent;
+exports.transformSuperProduct = transformSuperProduct;

@@ -8,6 +8,7 @@ const productQuotationResolver = require("./product-quotation")
 const quotationResolver = require("./quotation")
 const rentProductResolver = require("./rent-product");
 const rentResolver = require("./rent")
+const superProductResolver = require("./super-product")
 
 const rootResolver = {
   ...categoryResolver,
@@ -19,7 +20,8 @@ const rootResolver = {
   ...productQuotationResolver,
   ...quotationResolver,
   ...rentProductResolver,
-  ...rentResolver
+  ...rentResolver,
+  ...superProductResolver
 };
 
 module.exports = rootResolver;

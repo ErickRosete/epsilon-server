@@ -11,18 +11,21 @@ const productSchema = new Schema({
     type: String,
     required: true
   },
+  deleted: {
+    type: Boolean,
+    required: true
+  },
   imageLinks: [String],
   shortDescription: String,
   quantity: Number,
+  generic: Boolean,
+  codes: [String],
   subcategories: [
     {
       type: Schema.Types.ObjectId,
       ref: "Subcategory"
     }
   ],
-  generic: Boolean,
-  quantity: Number,
-  codes: [String],
 });
 
 module.exports = mongoose.model("Product", productSchema);

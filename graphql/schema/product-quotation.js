@@ -13,6 +13,7 @@ const ProductQuotationSchema = {
             product: ID
         }
     `,
+    
     query: `
         productQuotations: [ProductQuotation!]!
         productQuotation(id: ID!): ProductQuotation!

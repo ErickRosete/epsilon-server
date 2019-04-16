@@ -10,7 +10,7 @@ const productQuotation = require("./product-quotation");
 const quotation = require("./quotation");
 const accessory = require("./accessory");
 const rentProduct = require("./rent-product");
-const rentAccessory = require("./rent-acccessory");
+const rentAccessory = require("./rent-accessory");
 
 const rent = require("./rent")
 

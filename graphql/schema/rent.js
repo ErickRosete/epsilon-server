@@ -6,6 +6,7 @@ const rentSchema = {
             endDate: String
             client: Client
             rentProducts: [RentProduct]
+            rentAccessories: [RentAccessory]
         }
 
         input RentInput{
@@ -13,6 +14,7 @@ const rentSchema = {
             endDate: String
             client: ID
             rentProducts: [ID]
+            rentAccessories: [ID]
         }
     `,
     query: `

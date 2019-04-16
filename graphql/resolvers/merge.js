@@ -4,6 +4,8 @@ const Product = require("../../models/product");
 const Subcategory = require("../../models/subcategory");
 const ProductQuotation = require("../../models/product-quotation")
 const RentProduct = require("../../models/rent-product")
+const RentAccessory = require("../../models/rent-accessory");
+const Accessory = require("../../models/accessory")
 const DataLoader = require("dataloader");
 
 const { dateToString } = require("../../helpers/date");
@@ -147,6 +149,49 @@ const getRentProduct = async rentProductId => {
   }
 }
 
+//accessory
+const accessoryLoader = new DataLoader(accessoryIds => {
+  return getAccessories(accessoryIds);
+})
+
+const getAccessories = async accessoryIds => {
+  try {
+    const accessories = await Accessory.find({ _id: { $in: accessoryIds } });
+    return accessories.map(accessory => ({ ...accessory._doc }))
+  } catch (err) {
+    throw err;
+  }
+};
+
+const getAccessory = async accessoryId => {
+  try {
+    return await accessoryLoader.load(accessoryId.toString());
+  } catch (err) {
+    throw err;
+  }
+}
+
+//rent accessory
+const rentAccessoryLoader = new DataLoader(rentAccessoryIds => {
+  return getRentAccessories(rentAccessoryIds);
+})
+
+const getRentAccessories = async rentAccessoryIds => {
+  try {
+    const rentAccessories = await RentAccessory.find({ _id: { $in: rentAccessoryIds } });
+    return rentAccessories.map(rentAccessory => transformRentAccessory(rentAccessory));
+  } catch (err) {
+    throw err;
+  }
+};
+
+const getRentAccessory = async rentAccessoryId => {
+  try {
+    return await rentAccessoryLoader.load(rentAccessoryId.toString());
+  } catch (err) {
+    throw err;
+  }
+}
 
 //transform
 const transformProduct = product => {
@@ -217,14 +262,24 @@ const transformRentProduct = rentProduct => {
   }
 }
 
+const transformRentAccessory = rentAccessory => {
+  return {
+    ...rentAccessory._doc,
+    accessory: getAccessory.bind(this, rentAccessory.accessory)
+  }
+}
+
 const transformRent = rent => {
   return {
     ...rent._doc,
     startDate: dateToString(rent.startDate),
     endDate: dateToString(rent.endDate),
     client: getClient.bind(this, rent.client),
-    rentProducts: () => RentProduct.loadMany(
+    rentProducts: () => rentProductLoader.loadMany(
       rent.rentProducts.map(rentProduct => rentProduct.toString())
+    ),
+    rentAccessories: () => rentAccessoryLoader.loadMany(
+      rent.rentAccessories.map(rentAccessory => rentAccessory.toString())
     ),
   }
 }
@@ -236,5 +291,6 @@ exports.transformClient = transformClient;
 exports.transformProductQuotation = transformProductQuotation;
 exports.transformQuotation = transformQuotation;
 exports.transformRentProduct = transformRentProduct;
+exports.transformRentAccessory = transformRentAccessory;
 exports.transformRent = transformRent;
 exports.transformSuperProduct = transformSuperProduct;

@@ -12,11 +12,11 @@ const accessorySchema = {
             currentQuantity: Int,
         }
     `,
-    query = `
+    query: `
         accessories: [Accessory!]!
         accessory(id: ID!): Accessory!
     `,
-    mutation = `
+    mutation: `
         createAccessory(accessoryInput: AccessoryInput!): Accessory
         updateAccessory(id: ID!, accessoryInput: AccessoryInput!): Accessory
         deleteAccessory(id: ID!): Accessory

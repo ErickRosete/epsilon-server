@@ -17,13 +17,19 @@ const productSchema = new Schema({
   },
   imageLinks: [String],
   shortDescription: String,
-  quantity: Number,
-  generic: Boolean,
+  totalQuantity: Number,
+  currentQuantity: Number,
   codes: [String],
   subcategories: [
     {
       type: Schema.Types.ObjectId,
       ref: "Subcategory"
+    }
+  ],
+  accessories: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Accessory"
     }
   ],
 });

@@ -6,9 +6,12 @@ const promotionResolver = require("./promotion")
 const clientResolver = require("./client")
 const productQuotationResolver = require("./product-quotation")
 const quotationResolver = require("./quotation")
+const superProductResolver = require("./super-product")
 const rentProductResolver = require("./rent-product");
 const rentResolver = require("./rent")
-const superProductResolver = require("./super-product")
+const rentAccessoryResolver = require("./rent-accessory");
+const accessoryResolver = require("./accessory");
+
 
 const rootResolver = {
   ...categoryResolver,
@@ -20,6 +23,8 @@ const rootResolver = {
   ...productQuotationResolver,
   ...quotationResolver,
   ...rentProductResolver,
+  ...rentAccessoryResolver,
+  ...accessoryResolver,
   ...rentResolver,
   ...superProductResolver
 };

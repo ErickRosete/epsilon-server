@@ -1,6 +1,6 @@
 const RentProduct = require("../../models/rent-product");
 
-const { transformRentProduct } = require("./rent-product");
+const { transformRentProduct } =  require("./merge");
 
 module.exports = {
     rentProducts: async () => {

@@ -1,4 +1,5 @@
 const Subcategory = require("../../models/subcategory");
+const Product = require("../../models/product");
 
 module.exports = {
   subcategories: async () => {
@@ -50,6 +51,15 @@ module.exports = {
 
   deleteSubcategory: async (args) => {
     try {
+      //Delete reference from products
+      const products = await Product.find({ subcategories: args.id });
+      products.forEach(async product => {
+        const subcategoryIndex = product.subcategories.findIndex(subcategory => subcategory === args.id)
+        product.subcategories.splice(subcategoryIndex, 1);
+        await product.save();
+      });
+
+      //Delete Subcategory
       const subcategory = await Subcategory.findByIdAndDelete(args.id);
       return { ...subcategory._doc };
     } catch (err) {

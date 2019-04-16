@@ -8,7 +8,10 @@ const { promotionDef, promotionQuery, promotionMutation } = require("./promotion
 const { clientDef, clientQuery, clientMutation } = require("./client");
 const productQuotation = require("./product-quotation");
 const quotation = require("./quotation");
+const accessory = require("./accessory");
 const rentProduct = require("./rent-product");
+const rentAccessory = require("./rent-acccessory");
+
 const rent = require("./rent")
 
 module.exports = buildSchema(`
@@ -20,6 +23,8 @@ module.exports = buildSchema(`
     ${clientDef}
     ${productQuotation.definition}
     ${quotation.definition}
+    ${accessory.definition}
+    ${rentAccessory.definition}
     ${rentProduct.definition}
     ${rent.definition}
 
@@ -32,8 +37,10 @@ module.exports = buildSchema(`
         ${clientQuery}
         ${productQuotation.query}
         ${quotation.query}
+        ${accessory.query}
+        ${rentAccessory.query}
         ${rentProduct.query}
-        ${rent.query}
+        ${rent.query}    
     }
 
     type RootMutation {
@@ -43,8 +50,12 @@ module.exports = buildSchema(`
         ${userMutation}
         ${promotionMutation}
         ${clientMutation}
+        ${productQuotation.mutation}
+        ${quotation.mutation}
+        ${accessory.mutation}
+        ${rentAccessory.mutation}
         ${rentProduct.mutation}
-        ${rent.mutation}
+        ${rent.mutation}    
     }
 
     schema {

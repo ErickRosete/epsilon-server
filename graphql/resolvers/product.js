@@ -70,7 +70,7 @@ module.exports = {
       const rentProducts = await RentProduct.find({ product: args.id });
       const productQuotations = await ProductQuotation.find({ product: args.id })
 
-      if (rentProducts || productQuotations) {
+      if (rentProducts.length > 0 || productQuotations.length > 0) {
         const product = await Product.findById(args.id)
         product.subcategories = null;
         product.deleted = true;

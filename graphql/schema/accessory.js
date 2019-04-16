@@ -1,15 +1,18 @@
 const accessorySchema = {
     definition: `
         type Accessory {
+            _id: ID!
             name: String
             totalQuantity: Int,
             currentQuantity: Int,
+            deleted: Boolean
         }
 
         input AccessoryInput {
             name: String
             totalQuantity: Int,
             currentQuantity: Int,
+            deleted: Boolean
         }
     `,
     query: `

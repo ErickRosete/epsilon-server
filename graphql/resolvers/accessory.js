@@ -61,7 +61,7 @@ module.exports = {
 
             //Delete Accessory
             const rentAccessories = await RentAccessory.find({ accessory: args.id });
-            if (rentAccessories) {
+            if (rentAccessories.length > 0) {
                 //Soft Delete
                 const accessory = await Accessory.findById(args.id)
                 accessory.deleted = true;

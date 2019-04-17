@@ -37,11 +37,9 @@ module.exports = {
   },
 
   createProduct: async args => {
-    // if (!req.isAuth) {
-    //   throw new Error("Unauthenticated");
-    // }
     const product = Product({
-      ...args.productInput
+      ...args.productInput,
+      currentQuantity: args.productInput.totalQuantity
     });
 
     try {
@@ -54,12 +52,14 @@ module.exports = {
 
   updateProduct: async args => {
     try {
-      const product = await Product.findByIdAndUpdate(
-        args.id,
-        { ...args.productInput },
-        { new: true }
-      );
-      return transformProduct(product);
+      const prevProduct = await Product.findById(args.id);
+      if (prevProduct.totalQuantity !== args.productInput.totalQuantity) {
+          const currentQuantity = args.productInput.totalQuantity - prevProduct.totalQuantity + prevProduct.currentQuantity;
+          prevProduct.currentQuantity = currentQuantity;
+      }
+      prevProduct = { ...prevProduct._doc, ...args.productInput };
+      const result = await prevProduct.save();
+      return transformProduct(result);
     } catch (err) {
       throw err;
     }

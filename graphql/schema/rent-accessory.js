@@ -14,6 +14,7 @@ const rentAccessorySchema = {
     query: `
         rentAccessories: [RentAccessory!]!
         rentAccessory(id: ID!): RentAccessory!
+        clientRentAccessories(id: ID!): [RentAccessory]
     `,
 
     mutation: `

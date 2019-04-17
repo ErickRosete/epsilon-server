@@ -11,6 +11,7 @@ const rentProductResolver = require("./rent-product");
 const rentResolver = require("./rent")
 const rentAccessoryResolver = require("./rent-accessory");
 const accessoryResolver = require("./accessory");
+const inventoryResolver = require("./inventory")
 
 
 const rootResolver = {
@@ -26,7 +27,8 @@ const rootResolver = {
   ...rentAccessoryResolver,
   ...accessoryResolver,
   ...rentResolver,
-  ...superProductResolver
+  ...superProductResolver,
+  ...inventoryResolver
 };
 
 module.exports = rootResolver;

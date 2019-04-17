@@ -2,8 +2,8 @@ const accessorySchema = {
     definition: `
         type Accessory {
             _id: ID!
-            name: String
-            totalQuantity: Int,
+            name: String!
+            totalQuantity: Int!,
             currentQuantity: Int,
             deleted: Boolean
         }

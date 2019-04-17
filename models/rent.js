@@ -14,6 +14,12 @@ const rentSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "RentProduct"
         }
+    ],
+    rentAccessories: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "RentAccessory"
+        }
     ]
 });
 

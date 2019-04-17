@@ -11,6 +11,7 @@ const quotation = require("./quotation");
 const accessory = require("./accessory");
 const rentProduct = require("./rent-product");
 const rentAccessory = require("./rent-accessory");
+const inventory = require("./inventory")
 
 const rent = require("./rent")
 
@@ -27,6 +28,7 @@ module.exports = buildSchema(`
     ${rentAccessory.definition}
     ${rentProduct.definition}
     ${rent.definition}
+    ${inventory.definition}
 
     type RootQuery {
         ${categoryQuery}
@@ -40,7 +42,8 @@ module.exports = buildSchema(`
         ${accessory.query}
         ${rentAccessory.query}
         ${rentProduct.query}
-        ${rent.query}    
+        ${rent.query} 
+        ${inventory.query}   
     }
 
     type RootMutation {

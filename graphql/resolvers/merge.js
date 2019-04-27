@@ -194,11 +194,14 @@ const getRentAccessory = async rentAccessoryId => {
 }
 
 //transform
-const transformProduct = product => {
+const transformProduct = async product => {
   return {
     ...product._doc,
     subcategories: () => subcategoryLoader.loadMany(
       product._doc.subcategories.map((subcategory) => subcategory.toString())
+    ),
+    accessories: () => accessoryLoader.loadMany(
+      product._doc.accessories.map((accesory) => accesory.toString())
     )
   };
 };

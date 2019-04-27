@@ -24,6 +24,7 @@ const productDef = `
         subcategories: [ID]
         accessories: [ID]
         codes: [String]
+        deleted: Boolean
     }
 `;
 

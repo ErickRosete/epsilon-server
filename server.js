@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 const externalRequest = require("./middleware/external-requests");
 
 const { saveImage, saveImages } = require("./helpers/images");
+const { saveImageAsyncSingle,saveImageAsyncMultiple}=require("./helpers/Images/aws")
 const isAuth = require("./middleware/is-auth");
 
 const port = process.env.PORT || 5000;
@@ -34,8 +35,13 @@ const upload = multer({
     dest: "/app/uploads"
 });
 
-app.post('/uploadImage', upload.single("file"), (req, res) => {
-    saveImage(req, res);
+app.post('/uploadImage', upload.single("file"),  (req, res) => {
+    const folder=req.body.folder
+    console.log(`folder donde se guardara: ${folder}`)
+    saveImageAsyncSingle(req,res,folder)
+    
+    //guardar local
+    // saveImage(req, res);
 });
 
 app.post('/sendEmail', (req, res) => {
@@ -43,8 +49,13 @@ app.post('/sendEmail', (req, res) => {
     isSend ? res.status(200).json(req.body) : res.status(400).send({ error: "server error" });
 });
 
-app.post('/uploadImages', upload.array("files"), (req, res) => {
-    saveImages(req, res);
+app.post('/uploadImages', upload.array("files"), async (req, res) => {
+    const folder=req.body.folder
+    console.log(`folder donde se guardara: ${folder}`)
+    await saveImageAsyncMultiple(req,res,folder);
+
+    // guardar local
+    // saveImages(req, res);
 });
 
 mongoose

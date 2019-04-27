@@ -3,6 +3,7 @@ const accessorySchema = {
         type Accessory {
             _id: ID!
             name: String
+            code: String
             totalQuantity: Int,
             currentQuantity: Int,
             deleted: Boolean
@@ -10,6 +11,7 @@ const accessorySchema = {
 
         input AccessoryInput {
             name: String
+            code: String
             totalQuantity: Int,
             currentQuantity: Int,
             deleted: Boolean

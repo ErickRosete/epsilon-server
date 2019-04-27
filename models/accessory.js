@@ -7,6 +7,7 @@ const accessorySchema = new Schema({
         type: String,
         required: true
     },
+    code:String,
     deleted: {
         type: Boolean,
         required: true

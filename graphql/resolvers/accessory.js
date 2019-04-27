@@ -39,15 +39,27 @@ module.exports = {
 
     updateAccessory: async args => {
         try {
-            const prevAccessory = await Accessory.findById(args.id);
+            let prevAccessory = await Accessory.findById(args.id);
             if (prevAccessory.totalQuantity !== args.accessoryInput.totalQuantity) {
                 const currentQuantity = args.accessoryInput.totalQuantity - prevAccessory.totalQuantity + prevAccessory.currentQuantity;
                 prevAccessory.currentQuantity = currentQuantity;
             }
+            console.log(typeof(prevAccessory))
+            console.log(prevAccessory)
             prevAccessory = { ...prevAccessory._doc, ...args.accessoryInput };
-            const result = await prevAccessory.save();
+            console.log(prevAccessory)
+            console.log(typeof(prevAccessory))
+
+            // const result = await prevAccessory.save();
+            const result=await Accessory.findOneAndUpdate(
+                {_id:args.id},
+               prevAccessory ,{new:true}
+                // { new: true }
+            )
+            console.log(result)
             return { ...result._doc };
         } catch (err) {
+            console.log(err)
             throw err;
         }
     },

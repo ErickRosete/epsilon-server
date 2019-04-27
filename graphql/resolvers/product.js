@@ -52,13 +52,19 @@ module.exports = {
 
   updateProduct: async args => {
     try {
-      const prevProduct = await Product.findById(args.id);
+      // const prevProduct = await Product.findById(args.id);
+      let  prevProduct = await Product.findById(args.id);
       if (prevProduct.totalQuantity !== args.productInput.totalQuantity) {
           const currentQuantity = args.productInput.totalQuantity - prevProduct.totalQuantity + prevProduct.currentQuantity;
           prevProduct.currentQuantity = currentQuantity;
       }
       prevProduct = { ...prevProduct._doc, ...args.productInput };
-      const result = await prevProduct.save();
+      const result=await Product.findOneAndUpdate(
+        {_id:args.id},
+        prevProduct ,{new:true}
+        // { new: true }
+      )
+      // const result = await prevProduct.save();
       return transformProduct(result);
     } catch (err) {
       throw err;

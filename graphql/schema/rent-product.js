@@ -16,6 +16,7 @@ const rentProductSchema = {
     query: `
         rentProducts: [RentProduct!]!
         rentProduct(id: ID!): RentProduct!
+        clientRentProducts(id: ID!): [RentProduct]
     `,
 
     mutation: `

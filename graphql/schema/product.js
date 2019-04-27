@@ -2,7 +2,7 @@ const productDef = `
     type Product {
         _id: ID!
         name: String!
-        totalQuantity: Int,
+        totalQuantity: Int!,
         currentQuantity: Int,
         imageLinks: [String]
         shortDescription: String

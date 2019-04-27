@@ -286,6 +286,32 @@ const transformRent = rent => {
     ),
   }
 }
+// inventory
+const getInventoryProducts = inventoryProducts => {
+  return inventoryProducts.map(inventoryProduct =>{
+    return {
+      ...inventoryProduct,
+      product: getProduct.bind(this, inventoryProduct.product)
+    }
+  })
+};
+
+const getInventoryAccessories = inventoryAccessories => {
+  return inventoryAccessories.map(inventoryAccessory =>{
+    return {
+      ...inventoryAccessory,
+      accessory: getAccessory.bind(this, inventoryAccessory.accessory)
+    }
+  })
+};
+
+const transformInventory = inventory => {
+  return {
+    client: getClient.bind(this, inventory.client),
+    inventoryProducts: getInventoryProducts.bind(this, inventory.inventoryProducts),
+    inventoryAccessories: getInventoryAccessories.bind(this, inventory.inventoryAccessories),
+  }
+}
 
 exports.transformProduct = transformProduct;
 exports.transformUser = transformUser;
@@ -297,3 +323,4 @@ exports.transformRentProduct = transformRentProduct;
 exports.transformRentAccessory = transformRentAccessory;
 exports.transformRent = transformRent;
 exports.transformSuperProduct = transformSuperProduct;
+exports.transformInventory = transformInventory;

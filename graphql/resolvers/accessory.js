@@ -25,7 +25,8 @@ module.exports = {
 
     createAccessory: async args => {
         const accessory = Accessory({
-            ...args.accessoryInput
+            ...args.accessoryInput,
+            currentQuantity: args.accessoryInput.totalQuantity
         });
 
         try {
@@ -38,12 +39,14 @@ module.exports = {
 
     updateAccessory: async args => {
         try {
-            const accessory = await Accessory.findByIdAndUpdate(
-                args.id,
-                { ...args.accessoryInput },
-                { new: true }
-            );
-            return { ...accessory._doc };
+            const prevAccessory = await Accessory.findById(args.id);
+            if (prevAccessory.totalQuantity !== args.accessoryInput.totalQuantity) {
+                const currentQuantity = args.accessoryInput.totalQuantity - prevAccessory.totalQuantity + prevAccessory.currentQuantity;
+                prevAccessory.currentQuantity = currentQuantity;
+            }
+            prevAccessory = { ...prevAccessory._doc, ...args.accessoryInput };
+            const result = await prevAccessory.save();
+            return { ...result._doc };
         } catch (err) {
             throw err;
         }

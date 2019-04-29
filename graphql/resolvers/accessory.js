@@ -23,6 +23,15 @@ module.exports = {
         }
     },
 
+    accessoryByCode: async args => {
+        try {
+          const accessory = await Accessory.findOne({ code: args.code });
+          return { ...accessory._doc };
+        } catch (err) {
+          throw err;
+        }
+      },
+
     createAccessory: async args => {
         const accessory = Accessory({
             ...args.accessoryInput,

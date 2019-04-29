@@ -25,6 +25,15 @@ module.exports = {
     }
   },
 
+  productByCode: async args => {
+    try {
+      const product = await Product.findOne({ codes: args.code });
+      return transformProduct(product);
+    } catch (err) {
+      throw err;
+    }
+  },
+
   subcategoryProducts: async args => {
     try {
       const products = await Product.find({ subcategories: args.id });
@@ -53,15 +62,15 @@ module.exports = {
   updateProduct: async args => {
     try {
       // const prevProduct = await Product.findById(args.id);
-      let  prevProduct = await Product.findById(args.id);
+      let prevProduct = await Product.findById(args.id);
       if (prevProduct.totalQuantity !== args.productInput.totalQuantity) {
-          const currentQuantity = args.productInput.totalQuantity - prevProduct.totalQuantity + prevProduct.currentQuantity;
-          prevProduct.currentQuantity = currentQuantity;
+        const currentQuantity = args.productInput.totalQuantity - prevProduct.totalQuantity + prevProduct.currentQuantity;
+        prevProduct.currentQuantity = currentQuantity;
       }
       prevProduct = { ...prevProduct._doc, ...args.productInput };
-      const result=await Product.findOneAndUpdate(
-        {_id:args.id},
-        prevProduct ,{new:true}
+      const result = await Product.findOneAndUpdate(
+        { _id: args.id },
+        prevProduct, { new: true }
         // { new: true }
       )
       // const result = await prevProduct.save();

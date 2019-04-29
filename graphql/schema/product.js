@@ -31,6 +31,7 @@ const productDef = `
 const productQuery = `
     products: [Product!]!
     product(id: ID!): Product!
+    productByCode(code: String!): Product!
     subcategoryProducts(id: ID!): [Product!]!
 `;
 

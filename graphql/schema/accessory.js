@@ -20,6 +20,8 @@ const accessorySchema = {
     query: `
         accessories: [Accessory!]!
         accessory(id: ID!): Accessory!
+        accessoryByCode(code: String!): Accessory!
+
     `,
     mutation: `
         createAccessory(accessoryInput: AccessoryInput!): Accessory

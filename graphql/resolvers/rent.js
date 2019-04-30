@@ -27,7 +27,7 @@ module.exports = {
         const rent = Rent({
             ...args.rentInput
         });
-
+        console.log(rent)
         try {
             const result = await rent.save();
             return transformRent(result);

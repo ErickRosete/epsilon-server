@@ -1,4 +1,5 @@
 const Rent = require("../../models/rent");
+const Client = require("../../models/client");
 
 const { transformRent } = require("./merge");
 
@@ -28,6 +29,9 @@ module.exports = {
             ...args.rentInput
         });
         console.log(rent)
+        const client = await Client.findById(rent.client);
+        console.log(client)
+        
         try {
             const result = await rent.save();
             return transformRent(result);

@@ -273,6 +273,7 @@ const transformRentAccessory = rentAccessory => {
 }
 
 const transformRent = rent => {
+  console.log(rent)
   return {
     ...rent._doc,
     startDate: dateToString(rent.startDate),

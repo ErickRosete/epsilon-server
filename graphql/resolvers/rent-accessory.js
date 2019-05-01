@@ -1,4 +1,5 @@
 const RentAccessory = require("../../models/rent-accessory");
+const Accessory = require("../../models/accessory");
 
 const { transformRentAccessory } = require("./merge");
 
@@ -29,6 +30,11 @@ module.exports = {
         });
 
         try {
+            console.log(`id ${rentAccessory.accessory} cantidad ${rentAccessory.quantity}` )
+            const accessory = await Accessory.findById(rentAccessory.accessory);
+            console.log(`cantidad antes del cambio: ${accessory.currentQuantity}`);
+            accessory.currentQuantity-=rentAccessory.quantity;
+            accessory.save();
             const result = await rentAccessory.save();
             return transformRentAccessory(result);
         } catch (err) {

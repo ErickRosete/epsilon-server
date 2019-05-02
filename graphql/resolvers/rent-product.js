@@ -1,4 +1,5 @@
 const RentProduct = require("../../models/rent-product");
+const Product = require("../../models/product");
 
 const { transformRentProduct } = require("./merge");
 
@@ -27,8 +28,13 @@ module.exports = {
         const rentProduct = RentProduct({
             ...args.rentProductInput
         });
-
         try {
+            // console.log(rentProduct.quantity)
+            // console.log(rentProduct.product)
+            const product = await Product.findById(rentProduct.product);
+            // console.log(product.currentQuantity)
+            product.currentQuantity-=rentProduct.quantity;
+            product.save();
             const result = await rentProduct.save();
             return transformRentProduct(result);
         } catch (err) {

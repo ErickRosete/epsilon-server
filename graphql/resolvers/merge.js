@@ -273,6 +273,7 @@ const transformRentAccessory = rentAccessory => {
 }
 
 const transformRent = rent => {
+  console.log(rent)
   return {
     ...rent._doc,
     startDate: dateToString(rent.startDate),
@@ -305,6 +306,8 @@ const getInventoryAccessories = inventoryAccessories => {
   })
 };
 
+//todo agregar algo que identifique de que renta  vienen los productos y accesorios para que no haya broncas con los ids y keys
+//{id:_,contenido:{}}
 const transformInventory = inventory => {
   return {
     client: getClient.bind(this, inventory.client),

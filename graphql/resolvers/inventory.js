@@ -12,8 +12,14 @@ module.exports = {
             }
 
             const rents = await Rent.find({ client: args.id }).populate("rentProducts").populate("rentAccessories");
-            for (const rent in rents) {
-                for (const rentProduct in rent.rentProduct) {
+            console.log(rents)
+            for (const rent of rents) {
+                console.log("===")
+                console.log(rent.rentProducts)
+                console.log(rent.rentAccessories)
+                for (const rentProduct of rent.rentProducts) {
+                    
+                    console.log(rentProduct)
                     // search for rent product in inventory
                     const index = inventory.inventoryProducts.findIndex(invProduct => invProduct.product === rentProduct.product);
                     if (index > -1) {
@@ -24,7 +30,7 @@ module.exports = {
                         inventory.inventoryProducts.push(rentProduct);
                     }
                 }
-                for (const rentAccessory in rent.rentAccessory) {
+                for (const rentAccessory of rent.rentAccessories) {
                     const index = inventory.inventoryAccessories.findIndex(invAccessory => invAccessory.accessory === rentAccessory.accessory);
                     if (index > -1) {
                         inventory.inventoryAccessories[index].quantity += rentAccessory.quantity;

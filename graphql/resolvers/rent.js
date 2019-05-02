@@ -23,6 +23,17 @@ module.exports = {
         }
     },
 
+    clientRents: async (args) => {
+        try {
+            const rents = await Rent.find({ client: args.id });
+            return rents.map(rent => {
+                return transformRent(rent);
+            });
+        } catch (err) {
+            throw err;
+        }
+    },
+
     createRent: async args => {
         const rent = Rent({
             ...args.rentInput

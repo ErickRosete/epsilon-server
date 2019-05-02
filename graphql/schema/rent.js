@@ -20,6 +20,7 @@ const rentSchema = {
     query: `
         rents: [Rent!]!
         rent(id: ID!): Rent!
+        clientRents(id: ID!): [Rent]
     `,
 
     mutation: `

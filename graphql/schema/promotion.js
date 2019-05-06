@@ -1,14 +1,16 @@
 const promotionDef = `
     type Promotion {
         _id: ID!
-        name: String!
-        imageLink: String!
+        title: String
+        subtitle: String
+        percentage: String
         active: Boolean!
     }
 
     input PromotionInput{
-        name: String
-        imageLink: String
+        title: String
+        subtitle: String
+        percentage: String
         active: Boolean
     }
 `;
@@ -16,6 +18,7 @@ const promotionDef = `
 const promotionQuery = `
     promotions: [Promotion!]!
     activePromotions: [Promotion!]!
+    firstPromotion: Promotion
     promotion(id: ID!): Promotion
 `;
 

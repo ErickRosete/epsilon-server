@@ -32,6 +32,15 @@ module.exports = {
     }
   },
 
+  firstPromotion: async () => {
+    try {
+      const promotion = await Promotion.findOne();
+      return { ...promotion._doc };
+    } catch (err) {
+      throw err;
+    }
+  },
+  
   createPromotion: async args => {
     const promotion = Promotion({
       ...args.promotionInput

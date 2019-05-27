@@ -2,15 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const promotionSchema = new Schema(
-    {
-        name: {
-            type: String
-        },
-        imageLink: {
-            type: String
-        },
+    {   title: String,
+        subtitle: String,
+        percentage: String,
         active: Boolean,
-
     },
 );
 

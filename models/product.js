@@ -16,6 +16,7 @@ const productSchema = new Schema({
     required: true
   },
   imageLinks: [String],
+  details: String,
   shortDescription: String,
   totalQuantity: Number,
   currentQuantity: Number,

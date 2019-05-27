@@ -6,6 +6,7 @@ const productDef = `
         currentQuantity: Int,
         imageLinks: [String]
         shortDescription: String
+        details: String
         description: String
         videoLink: String
         subcategories: [Subcategory]
@@ -19,6 +20,7 @@ const productDef = `
         currentQuantity: Int,
         imageLinks: [String]
         shortDescription: String
+        details: String
         description: String
         videoLink: String
         subcategories: [ID]

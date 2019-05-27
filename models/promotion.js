@@ -4,12 +4,10 @@ const Schema = mongoose.Schema;
 const promotionSchema = new Schema(
     {
         name: {
-            type: String,
-            required: true
+            type: String
         },
         imageLink: {
-            type: String,
-            required: true
+            type: String
         },
         active: Boolean,
 

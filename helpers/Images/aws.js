@@ -114,7 +114,7 @@ const setCredentials=async (folder,file)=>{
 
 exports.saveImageAsyncMultiple = async (req, res, folder) => {
     imageLinks = [];
-    console.log("saving in aws")
+    console.log("##########################saving in aws")
     console.log(req.files);
     console.log(req.files.length)
     req.files.forEach(file => {
@@ -128,6 +128,8 @@ exports.saveImageAsyncMultiple = async (req, res, folder) => {
                 console.log("=======termine de leer el json")
                 let folder=data[0];let file=data[1]
                 await subeAmazon(folder,file);
+                console.log("subi a amazon")
+                console.log(imageLinks)
                 if(imageLinks.length==req.files.length){
                     console.log("captura de imagenes terminada")
                     console.log(imageLinks)

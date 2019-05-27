@@ -1,8 +1,8 @@
 const promotionDef = `
     type Promotion {
         _id: ID!
-        name: String!
-        imageLink: String!
+        name: String
+        imageLink: String
         active: Boolean!
     }
 
